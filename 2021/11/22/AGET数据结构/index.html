@@ -154,11 +154,12 @@
 <p>0 + SOE + EOE + packet size</p>
 </blockquote>
 <p>0：头1位填充0;<br>SOE：事件头包标志，1位；<br>eoe：事件结束包标志，1位；<br>头包：010…；数据包：000…；结束包：001…；<br>packet size：13位。</p>
-<h2 id="事件头-Event-Header"><a href="#事件头-Event-Header" class="headerlink" title="事件头 Event Header"></a>事件头 Event Header</h2><p><img src="/../img/event_header.jpg" alt="event packet"></p>
-<center>Event Packet</center>
-<br/>
+<h2 id="事件头-Event-Header"><a href="#事件头-Event-Header" class="headerlink" title="事件头 Event Header"></a>事件头 Event Header</h2><center>
 
+<p><img src="/../img/event_header.jpg" alt="event packet"><br>Event Packet<br><br/></p>
 <p><img src="/../img/event_header_s1.jpg" alt="event packet"><br><br/></p>
+</center>
+
 <blockquote>
 <p>ac0f 401c</p>
 </blockquote>
@@ -175,14 +176,13 @@
 <p>0000 0000</p>
 </blockquote>
 <p>32位时间戳<br>除此之外的事件头中的数据没有使用。<br>ps. 在数据获取中，很重要的就是大小和速度，这么多无用数据，应该于大小和速度都无益。</p>
-<h2 id="事件数据-Event-Data"><a href="#事件数据-Event-Data" class="headerlink" title="事件数据 Event Data"></a>事件数据 Event Data</h2><p><img src="/../img/event_data.jpg" alt="event packet"></p>
-<center>Event Data</center>
-<br/>
+<h2 id="事件数据-Event-Data"><a href="#事件数据-Event-Data" class="headerlink" title="事件数据 Event Data"></a>事件数据 Event Data</h2><center>
 
+<p><img src="/../img/event_data.jpg" alt="event packet"><br>Event Data<br><br/></p>
 <p><img src="/../img/event_data_s1.jpg" alt="event packet"><br><br/></p>
-<blockquote>
-<p>ac0f 0404</p>
-</blockquote>
+</center>
+> ac0f 0404
+
 <p>事件强制包头，(0404)<sub>16</sub> = (0000 0100 0000 0100)<sub>2</sub>，000… = 事件数据。</p>
 <blockquote>
 <p>c9b2</p>
@@ -192,11 +192,12 @@
 <p>34b0 34c9 34dc …</p>
 </blockquote>
 <p>0x3是填充的4位固定数(PFX_ADC)；之后的12位是来自AGET的512个单元的12位ADC数据。</p>
-<h2 id="事件结束-Event-End"><a href="#事件结束-Event-End" class="headerlink" title="事件结束 Event End"></a>事件结束 Event End</h2><p><img src="/../img/event_end.jpg" alt="event packet"></p>
-<center>Event Data</center>
-<br/>
+<h2 id="事件结束-Event-End"><a href="#事件结束-Event-End" class="headerlink" title="事件结束 Event End"></a>事件结束 Event End</h2><center>
 
+<p><img src="/../img/event_end.jpg" alt="event packet"><br>Event End<br><br/></p>
 <p><img src="/../img/event_end_s1.jpg" alt="event packet"><br><br/></p>
+</center>
+
 <blockquote>
 <p>ac0f </p>
 </blockquote>
