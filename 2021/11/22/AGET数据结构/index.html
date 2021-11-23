@@ -145,7 +145,7 @@
         <h1 id="学习笔记-浅析AGET-v3-数据文件的数据结构"><a href="#学习笔记-浅析AGET-v3-数据文件的数据结构" class="headerlink" title="学习笔记 浅析AGET(v3)数据文件的数据结构"></a><code>学习笔记</code> 浅析AGET(v3)数据文件的数据结构</h1><h2 id="凡例和强制包头规定"><a href="#凡例和强制包头规定" class="headerlink" title="凡例和强制包头规定"></a>凡例和强制包头规定</h2><blockquote>
 <p><code>hex</code> ac0f<br><code>bin</code> 1010 1100 0000 1111</p>
 </blockquote>
-<p><img src="../img/event_packet.jpg" alt="event packet"></p>
+<p><img src="/../img/event_packet.jpg" alt="event packet"></p>
 <center>Event Packet</center>
 <br/>
 
@@ -154,11 +154,11 @@
 <p>0 + SOE + EOE + packet size</p>
 </blockquote>
 <p>0：头1位填充0;<br>SOE：事件头包标志，1位；<br>eoe：事件结束包标志，1位；<br>头包：010…；数据包：000…；结束包：001…；<br>packet size：13位。</p>
-<h2 id="事件头-Event-Header"><a href="#事件头-Event-Header" class="headerlink" title="事件头 Event Header"></a>事件头 Event Header</h2><p><img src="../img/event_header.jpg" alt="event packet"></p>
+<h2 id="事件头-Event-Header"><a href="#事件头-Event-Header" class="headerlink" title="事件头 Event Header"></a>事件头 Event Header</h2><p><img src="/../img/event_header.jpg" alt="event packet"></p>
 <center>Event Packet</center>
 <br/>
 
-<p><img src="../img/event_header_s1.jpg" alt="event packet"><br><br/></p>
+<p><img src="/../img/event_header_s1.jpg" alt="event packet"><br><br/></p>
 <blockquote>
 <p>ac0f 401c</p>
 </blockquote>
@@ -166,7 +166,7 @@
 <blockquote>
 <p>0304 </p>
 </blockquote>
-<p>(0304)<sub>16</sub> = (0000 0011 0000 0100)<sub>2</sub>；<br>(03)<sub>16</sub>是8位固定位(PFX_START_OF_EVENT<br>)；<br>中间3位用0填充(ETYPE and ST)；<br>最后5位(SOURCE ID)写入FEC的ID，这里(00100<sub>2</sub> = (4)<sub>16</sub> = (4)<sub>10</sub>，即意味着这一数据来源于ID为4的FEC board。</p>
+<p>(0304)<sub>16</sub> = (0000 0011 0000 0100)<sub>2</sub>；<br>(03)<sub>16</sub>是8位固定位(PFX_START_OF_EVENT)；中间3位用0填充(ETYPE and ST)；最后5位(SOURCE ID)写入FEC的ID，这里(00100)<sub>2</sub> = (4)<sub>16</sub> = (4)<sub>10</sub>，即意味着这一数据来源于ID为4的FEC board。</p>
 <blockquote>
 <p>d7ab 25c3 0001</p>
 </blockquote>
@@ -175,11 +175,11 @@
 <p>0000 0000</p>
 </blockquote>
 <p>32位时间戳<br>除此之外的事件头中的数据没有使用。<br>ps. 在数据获取中，很重要的就是大小和速度，这么多无用数据，应该于大小和速度都无益。</p>
-<h2 id="事件数据-Event-Data"><a href="#事件数据-Event-Data" class="headerlink" title="事件数据 Event Data"></a>事件数据 Event Data</h2><p><img src="../img/event_data.jpg" alt="event packet"></p>
+<h2 id="事件数据-Event-Data"><a href="#事件数据-Event-Data" class="headerlink" title="事件数据 Event Data"></a>事件数据 Event Data</h2><p><img src="/../img/event_data.jpg" alt="event packet"></p>
 <center>Event Data</center>
 <br/>
 
-<p><img src="../img/event_data_s1.jpg" alt="event packet"><br><br/></p>
+<p><img src="/../img/event_data_s1.jpg" alt="event packet"><br><br/></p>
 <blockquote>
 <p>ac0f 0404</p>
 </blockquote>
@@ -187,16 +187,16 @@
 <blockquote>
 <p>c9b2</p>
 </blockquote>
-<p>(c9b2)<sub>16</sub> = (1100 1001 1011 0010)<sub>2</sub> = (11 00100 11 0110010)<sub>2</sub>，头2位是固定填充的(11)<sub>2</sub>，随后依次为board（5位）、chip（2位）、channel（7位）。(00100) = (4)<sub>10</sub>，(11) = (2)<sub>10</sub>，(0110010) = (50)<sub>10</sub>，即说明此信号来自于4号FEC board的2号芯片的50通道。</p>
+<p>(c9b2)<sub>16</sub> = (1100 1001 1011 0010)<sub>2</sub> = (11 00100 11 0110010)<sub>2</sub>，头2位是固定填充的(11)<sub>2</sub>，随后依次为board（5位）、chip（2位）、channel（7位）。(00100)<sub>2</sub> = (4)<sub>10</sub>，(11)<sub>2</sub> = (2)<sub>10</sub>，(0110010)<sub>2</sub> = (50)<sub>10</sub>，即说明此信号来自于4号FEC board的2号芯片的50通道。</p>
 <blockquote>
 <p>34b0 34c9 34dc …</p>
 </blockquote>
 <p>0x3是填充的4位固定数(PFX_ADC)；之后的12位是来自AGET的512个单元的12位ADC数据。</p>
-<h2 id="事件结束-Event-End"><a href="#事件结束-Event-End" class="headerlink" title="事件结束 Event End"></a>事件结束 Event End</h2><p><img src="../img/event_end.jpg" alt="event packet"></p>
+<h2 id="事件结束-Event-End"><a href="#事件结束-Event-End" class="headerlink" title="事件结束 Event End"></a>事件结束 Event End</h2><p><img src="/../img/event_end.jpg" alt="event packet"></p>
 <center>Event Data</center>
 <br/>
 
-<p><img src="../img/event_end_s1.jpg" alt="event packet"><br><br/></p>
+<p><img src="/../img/event_end_s1.jpg" alt="event packet"><br><br/></p>
 <blockquote>
 <p>ac0f </p>
 </blockquote>
