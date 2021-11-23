@@ -11,7 +11,7 @@
 
     <title>
         
-        こ(゜-゜)つロ干杯！
+        浅析AGET(v3)数据文件的数据结构 - こ(゜-゜)つロ干杯！
         
     </title>
 
@@ -69,7 +69,7 @@
                     <span>标签</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
                     <span>存档</span>
@@ -91,6 +91,10 @@
             
         </ul>
     </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%B5%85%E6%9E%90AGET-v3-%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">学习笔记 浅析AGET(v3)数据文件的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A1%E4%BE%8B%E5%92%8C%E5%BC%BA%E5%88%B6%E5%8C%85%E5%A4%B4%E8%A7%84%E5%AE%9A"><span class="toc-text">凡例和强制包头规定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%B4-Event-Header"><span class="toc-text">事件头 Event Header</span></a></li></ol></li></ol>
+</div>
     
 </div>
 
@@ -118,65 +122,57 @@
         
 
 
-<!-- 归档列表 -->
+<div class="post-container">
+    <div class="post-title">
+        浅析AGET(v3)数据文件的数据结构
+    </div>
 
-<div class="archives-container">
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-11-22 23:40:30</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#数据获取与处理" title="数据获取与处理">数据获取与处理</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="学习笔记-浅析AGET-v3-数据文件的数据结构"><a href="#学习笔记-浅析AGET-v3-数据文件的数据结构" class="headerlink" title="学习笔记 浅析AGET(v3)数据文件的数据结构"></a><code>学习笔记</code> 浅析AGET(v3)数据文件的数据结构</h1><h2 id="凡例和强制包头规定"><a href="#凡例和强制包头规定" class="headerlink" title="凡例和强制包头规定"></a>凡例和强制包头规定</h2><blockquote>
+<p><code>hex</code> ac0f<br><code>bin</code> 1010 1100 0000 1111</p>
+</blockquote>
+<p>一个事件=事件头包+数据包+结束包<br>An event = event header packet + event data packet + event end packet<br>每个包（packet）都以0xac0f开始，之后跟随的是表征包的属性（头、数据还是结束）和大小的16位二进制数。</p>
+<blockquote>
+<p>0 + soe + eoe + packet size</p>
+</blockquote>
+<p>soe：事件头包标志，1位；<br>eoe：事件结束包标志，1位；<br>头包：010…；数据包：000…；结束包：001…；<br>packet size：十三位。</p>
+<h2 id="事件头-Event-Header"><a href="#事件头-Event-Header" class="headerlink" title="事件头 Event Header"></a>事件头 Event Header</h2><blockquote>
+<p>ac0f 401c</p>
+</blockquote>
+<p>事件强制包头，(401c)<sub>16</sub> = (0100 0000 0001 1100)<sub>2</sub>，010… = 事件头。</p>
+<blockquote>
+<p>0304 d7ab 25c3 0001</p>
+</blockquote>
+<p>48位时间戳</p>
+<blockquote>
+<p>0000 0000 0000</p>
+</blockquote>
+<p>32位时间戳</p>
 
-<div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2021">
-                    <span class="tag-text">2021</span>
-                </span>
-    <ul>
         
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>11-22</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2021/11/22/AGET数据结构/">
-                        <span>
-                            浅析AGET(v3)数据文件的数据结构
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
-        
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>11-14</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2021/11/14/哲学笔记1/">
-                        <span>
-                            怎么理解物质和运动
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
-        
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>11-13</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2021/11/13/hello-world/">
-                        <span>
-                            Hello World
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
-        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
 
-    </ul>
-</div>
+        <div id="lv-container">
+        </div>
 
+    </div>
 </div>
 
     </div>
@@ -255,7 +251,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
