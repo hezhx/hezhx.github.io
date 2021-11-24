@@ -142,79 +142,50 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <h1 id="学习笔记-浅析AGET-v3-数据文件的数据结构"><a href="#学习笔记-浅析AGET-v3-数据文件的数据结构" class="headerlink" title="学习笔记 浅析AGET(v3)数据文件的数据结构"></a><code>学习笔记</code> 浅析AGET(v3)数据文件的数据结构</h1><h2 id="凡例和强制包头规定"><a href="#凡例和强制包头规定" class="headerlink" title="凡例和强制包头规定"></a>凡例和强制包头规定</h2><blockquote>
-<p><code>hex</code> ac0f<br><code>bin</code> 1010 1100 0000 1111</p>
-</blockquote>
+        <h1 id="学习笔记-浅析AGET-v3-数据文件的数据结构"><a href="#学习笔记-浅析AGET-v3-数据文件的数据结构" class="headerlink" title="学习笔记 浅析AGET(v3)数据文件的数据结构"></a><code>学习笔记</code> 浅析AGET(v3)数据文件的数据结构</h1><h2 id="凡例和强制包头规定"><a href="#凡例和强制包头规定" class="headerlink" title="凡例和强制包头规定"></a>凡例和强制包头规定</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hex: ac0f</span><br><span class="line">bin: 1010 1100 0000 1111</span><br></pre></td></tr></table></figure>
 <p><img src="/../img/event_packet.jpg" alt="event packet"></p>
 <center>Event Packet</center>
 <br/>
 
 <p>一个事件=事件头包+数据包+结束包<br>An event = event header packet + event data packet + event end packet<br>每个包（packet）都以0xac0f开始，之后跟随的是表征包的属性（头、数据还是结束）和大小的16位二进制数。</p>
-<blockquote>
-<p>0 + SOE + EOE + packet size</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 + SOE + EOE + packet size</span><br></pre></td></tr></table></figure>
 <p>0：头1位填充0;<br>SOE：事件头包标志，1位；<br>eoe：事件结束包标志，1位；<br>头包：010…；数据包：000…；结束包：001…；<br>packet size：13位。</p>
 <h2 id="事件头-Event-Header"><a href="#事件头-Event-Header" class="headerlink" title="事件头 Event Header"></a>事件头 Event Header</h2><center>
 
-<p><img src="/../img/event_header.jpg" alt="event packet"><br>Event Packet<br><br/></p>
-<p><img src="/../img/event_header_s1.jpg" alt="event packet"><br><br/></p>
+<p><img src="/../img/event_header.jpg" alt="event packet"><br>Event Packet<br><img src="/../img/event_header_s1.jpg" alt="event packet"><br><br/></p>
 </center>
 
-<blockquote>
-<p>ac0f 401c</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ac0f 401c</span><br></pre></td></tr></table></figure>
 <p>事件强制包头，(401c)<sub>16</sub> = (0100 0000 0001 1100)<sub>2</sub>，010… = 事件头。</p>
-<blockquote>
-<p>0304 </p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0304</span><br></pre></td></tr></table></figure>
 <p>(0304)<sub>16</sub> = (0000 0011 0000 0100)<sub>2</sub>；<br>(03)<sub>16</sub>是8位固定位(PFX_START_OF_EVENT)；中间3位用0填充(ETYPE and ST)；最后5位(SOURCE ID)写入FEC的ID，这里(00100)<sub>2</sub> = (4)<sub>16</sub> = (4)<sub>10</sub>，即意味着这一数据来源于ID为4的FEC board。</p>
-<blockquote>
-<p>d7ab 25c3 0001</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d7ab 25c3 0001</span><br></pre></td></tr></table></figure>
 <p>48位时间戳</p>
-<blockquote>
-<p>0000 0000</p>
-</blockquote>
-<p>32位时间戳<br>除此之外的事件头中的数据没有使用。<br>ps. 在数据获取中，很重要的就是大小和速度，这么多无用数据，应该于大小和速度都无益。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000 0000</span><br></pre></td></tr></table></figure>
+<p>32位事件计数(Event Count)<br>除此之外的事件头中的数据没有使用。<br>ps. 在数据获取中，很重要的就是大小和速度，这么多无用数据，应该于大小和速度都无益。</p>
 <h2 id="事件数据-Event-Data"><a href="#事件数据-Event-Data" class="headerlink" title="事件数据 Event Data"></a>事件数据 Event Data</h2><center>
 
-<p><img src="/../img/event_data.jpg" alt="event packet"><br>Event Data<br><br/></p>
-<p><img src="/../img/event_data_s1.jpg" alt="event packet"><br><br/></p>
+<p><img src="/../img/event_data.jpg" alt="event packet"><br>Event Data<br><img src="/../img/event_data_s1.jpg" alt="event packet"><br><br/></p>
 </center>
 
-<blockquote>
-<p>ac0f 0404</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ac0f 0404</span><br></pre></td></tr></table></figure>
 <p>事件强制包头，(0404)<sub>16</sub> = (0000 0100 0000 0100)<sub>2</sub>，000… = 事件数据。</p>
-<blockquote>
-<p>c9b2</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c9b2</span><br></pre></td></tr></table></figure>
 <p>(c9b2)<sub>16</sub> = (1100 1001 1011 0010)<sub>2</sub> = (11 00100 11 0110010)<sub>2</sub>，头2位是固定填充的(11)<sub>2</sub>，随后依次为board（5位）、chip（2位）、channel（7位）。(00100)<sub>2</sub> = (4)<sub>10</sub>，(11)<sub>2</sub> = (2)<sub>10</sub>，(0110010)<sub>2</sub> = (50)<sub>10</sub>，即说明此信号来自于4号FEC board的2号芯片的50通道。</p>
-<blockquote>
-<p>34b0 34c9 34dc …</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">34b0 34c9 34dc ...</span><br></pre></td></tr></table></figure>
 <p>0x3是填充的4位固定数(PFX_ADC)；之后的12位是来自AGET的512个单元的12位ADC数据。</p>
 <h2 id="事件结束-Event-End"><a href="#事件结束-Event-End" class="headerlink" title="事件结束 Event End"></a>事件结束 Event End</h2><center>
 
-<p><img src="/../img/event_end.jpg" alt="event packet"><br>Event End<br><br/></p>
-<p><img src="/../img/event_end_s1.jpg" alt="event packet"><br><br/></p>
+<p><img src="/../img/event_end.jpg" alt="event packet"><br>Event End<br><img src="/../img/event_end_s1.jpg" alt="event packet"><br><br/></p>
 </center>
 
-<blockquote>
-<p>ac0f </p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ac0f </span><br></pre></td></tr></table></figure>
 <p>强制协议头</p>
-<blockquote>
-<p>2008</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2008</span><br></pre></td></tr></table></figure>
 <p>(0010 0000 0000 1000)<sub>2</sub>，前3位(001)<sub>2</sub> = 结束包。</p>
-<blockquote>
-<p>02c4</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">02c4</span><br></pre></td></tr></table></figure>
 <p>(0000 0010 1100 0100)<sub>2</sub>，前10位(0000 0010 11)<sub>2</sub>是固定数据(PFX_END_OF_EVENT)，第11位(ST)填充0，最后4位(SOURCE_ID)是FEC的ID，这里是(0100)<sub>2</sub> = (4)<sub>10</sub>，代表ID = 4的FEC板子。</p>
-<blockquote>
-<p>0000 0000 0000</p>
-</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 0000</span><br></pre></td></tr></table></figure>
 <p>32位事件大小表示当前事件的总大小，但现在它们被填充为0。</p>
 
         
