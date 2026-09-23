@@ -1,0 +1,65 @@
+name: Build and Deploy
+
+# 触发条件：推送到 source 分支（源码分支），或手动触发
+on:
+  push:
+    branches:
+      - source
+  workflow_dispatch:
+
+# 允许向仓库写入（部署需要把生成结果推到 main 分支）
+permissions:
+  contents: write
+
+# 同一时间只跑一个部署
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build site
+        run: npx hexo generate
+
+      - name: Deploy to main branch
+        run: |
+          set -e
+          cd public
+          touch .nojekyll
+
+          git init -b main
+          git config user.name "hezhx"
+          git config user.email "sunset114514@outlook.com"
+
+          remote="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git remote add origin "$remote"
+
+          # 保留 main 上已有的提交历史，把本次构建结果作为新提交追加
+          # 注意：这里必须完整 fetch（不能 --depth=1），否则 push 会被
+          # "shallow update not allowed" 拒绝
+          git fetch origin main
+          git reset --mixed FETCH_HEAD
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "没有变化，跳过部署"
+          else
+            git commit -m "Site updated: $(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')"
+            git push origin main
+          fi

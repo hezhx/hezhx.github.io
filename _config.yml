@@ -1,0 +1,141 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 讓想象力奪權
+subtitle: 'Man must prove the truth — i.e. the reality and power, the this-sidedness of his thinking in practice.'
+description: '人应该在实践中证明自己思维的真理性，及自己思维的现实性和力量，亦即自己思维的此岸性。'
+keywords:
+author: SUNSET
+language: zh
+timezone: 'Asia/Shanghai'
+
+# URL
+## 站点部署在 https://hezhx.github.io/，permalink 与旧站保持一致，保证已有链接不失效
+url: https://hezhx.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true
+  field: site
+  exclude:
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+meta_generator: true
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: ''
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Archive generator（旧站有 /archives/2022/page/2 这类分年分月归档）
+archive_generator:
+  per_page: 10
+  yearly: true
+  monthly: true
+  daily: false
+
+# Include / Exclude file(s)
+include:
+exclude:
+ignore:
+
+# Extensions
+theme: aircloud
+
+# ================= AirCloud 主题配置 =================
+SEOTitle: 讓想象力奪權 All Power to the Imagination!
+email:
+keyword:
+
+# SNS（页脚社交图标）
+zhihu_username: sun-set-4-u
+weibo_username: '6540356238'
+github_username: hezhx
+
+# 侧边栏头像（相对 root）
+sidebar-avatar: img/avatar.jpg
+avatar_style:
+  radius: true
+
+# 页脚友情链接
+friends:
+  - title: 中文马克思主义文库
+    href: 'https://www.marxists.org/chinese/index.html'
+  - title: GEANT4
+    href: 'https://geant4.web.cern.ch/'
+  - title: Sci-Hub
+    href: 'https://sci-hub.se/'
+  - title: My ORCID
+    href: 'https://orcid.org/0000-0001-8515-8939'
+  - title: ROOT
+    href: 'https://root.cern.ch/'
+  - title: Huawei Cloud
+    href: 'https://cloud.huawei.com/home#/home'
+
+# 站内搜索（需 hexo-generator-search，生成 search.json）
+search:
+  path: search.json
+  field: post
+
+# 文章样式：0 = 不首行缩进
+post_style:
+  indent: 0
+# ====================================================
+
+# Deployment
+## 本项目通过 GitHub Actions 自动部署（见 .github/workflows/deploy.yml）
+## 把 public/ 推送到 hezhx/hezhx.github.io 的 main 分支
+deploy:
+  type: ''
