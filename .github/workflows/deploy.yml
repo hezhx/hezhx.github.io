@@ -20,6 +20,11 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
+    # 必须固定时区：runner 默认 UTC，会让「凌晨发布」的文章日期退到前一天，
+    # 导致 permalink 里的年月日和旧站不一致（链接失效）
+    env:
+      TZ: Asia/Shanghai
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
