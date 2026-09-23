@@ -121,8 +121,10 @@ friends:
     href: 'https://orcid.org/0000-0001-8515-8939'
   - title: ROOT
     href: 'https://root.cern.ch/'
-  - title: Huawei Cloud
-    href: 'https://cloud.huawei.com/home#/home'
+  - title: DeepSeek
+    href: 'https://chat.deepseek.com/'
+  - title: Bilibili
+    href: 'https://space.bilibili.com/20935028'
 
 # 站内搜索（需 hexo-generator-search，生成 search.json）
 search:
