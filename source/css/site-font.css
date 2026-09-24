@@ -1,0 +1,57 @@
+/* ============================================================
+   全站字体：思源宋体（Source Han Serif CN）
+   字体文件：source/fonts/*.woff2（按本站实际用字子集化，由
+   _fonts-tool/build-fonts.js 生成）。
+   注意：新增文章后如果出现本站没出现过的字，需要重新运行该脚本。
+   ============================================================ */
+
+@font-face {
+  font-family: "SourceHanSerif";
+  src: url("../fonts/source-han-serif-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SourceHanSerif";
+  src: url("../fonts/source-han-serif-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SourceHanSerif";
+  src: url("../fonts/source-han-serif-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- 全局生效 ---------- */
+html,
+body,
+* {
+  font-family: "SourceHanSerif", "Source Han Serif CN", "Source Han Serif SC",
+    "Noto Serif SC", "宋体", SimSun, serif;
+}
+
+/* ---------- 覆盖主题里写死字体族的几处 ---------- */
+.nav .avatar-name .name i,
+.index-about i,
+.index-about-mobile i,
+.footer p,
+.footer p a,
+.footer p span a {
+  font-family: "SourceHanSerif", "Source Han Serif CN", "Source Han Serif SC",
+    "Noto Serif SC", "宋体", SimSun, serif !important;
+}
+
+/* ---------- 代码仍然用等宽字体 ---------- */
+pre,
+code,
+kbd,
+samp {
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+}
