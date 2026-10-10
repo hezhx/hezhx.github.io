@@ -2,17 +2,16 @@
    全站字体：思源宋体（Source Han Serif CN）
    字体文件：source/fonts/*.woff2（按本站实际用字子集化，由
    _fonts-tool/build-fonts.js 生成）。
+   字重：只提供 Regular(400) 与 Bold(700)，不提供 Light(300)，
+   因此主题里大量 font-weight:300 的地方会就近匹配到 Regular，
+   全站正文统一为 Regular。
    注意：新增文章后如果出现本站没出现过的字，需要重新运行该脚本。
    ============================================================ */
 
-@font-face {
-  font-family: "SourceHanSerif";
-  src: url("../fonts/source-han-serif-light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* 说明：故意没有 Light(300) 的 @font-face。
+   主题 aircloud.css 里 23 处 font-weight:300（正文 .post-content、
+   文章标题、首页时间/标签、页脚、搜索框等）按 CSS 字体匹配规则
+   会落到 Regular，观感统一。 */
 @font-face {
   font-family: "SourceHanSerif";
   src: url("../fonts/source-han-serif-regular.woff2") format("woff2");
